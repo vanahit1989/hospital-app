@@ -11,6 +11,7 @@ export type PrivateRouteType = PublicRouteType & {
     icon?: string;
     subRoutes?: PrivateRouteType[];
     notInSidebar?: boolean;
+    hideFromSideBar?: boolean;
 };
 
 export enum ERoutesPaths {

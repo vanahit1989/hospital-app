@@ -9,6 +9,7 @@ const PublicRoutes: FC<{
 }> = ({ isLoggedIn }) => {
     const navigate = useNavigate();
     useEffect(() => {
+        console.log(isLoggedIn, 'isLoggedIn')
         if (isLoggedIn) {
             navigate(`app/${ERoutesPaths.PATIENTS}`);
         }

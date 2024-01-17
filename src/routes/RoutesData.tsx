@@ -1,16 +1,20 @@
 import {ERoutesPaths, PrivateRouteType, PublicRouteType} from "./Routes.types.ts";
 import {EIconNames} from "../components/Icon/Icon.type.ts";
 import Login from '../pages/public/Login.tsx';
+import Practice from '../pages/private/Practice.tsx';
+import Patients from '../pages/private/Patients.tsx';
+import Users from '../pages/private/Users.tsx';
+import Automation from '../pages/private/Automation.tsx';
 export const privateRoutes: PrivateRouteType[] = [{
-    title: 'Patients', component: <>Patients</>, path: ERoutesPaths.PATIENTS, index: true, icon: EIconNames.USERS,
+    title: 'Patients', component: Patients, path: ERoutesPaths.PATIENTS, index: true, icon: EIconNames.USERS,
 }, {
-    title: 'Practice', component: <>Practice</>, path: ERoutesPaths.PRACTICE, icon: EIconNames.COMPANY,
+    title: 'Practice', component: Practice, path: ERoutesPaths.PRACTICE, icon: EIconNames.COMPANY,
 }, {
-    title: 'Automation', component: <>Automation</>, path: ERoutesPaths.AUTOMATION, icon: EIconNames.LAYERS,
+    title: 'Automation', component: Automation, path: ERoutesPaths.AUTOMATION, icon: EIconNames.LAYERS,
 }, {
-    title: 'USERS', component: <>Users</>, path: ERoutesPaths.USERS, icon: EIconNames.USERS,
+    title: 'Users', component:Users, path: ERoutesPaths.USERS, icon: EIconNames.USERS,
 }, {
-    title: 'Page not found', component: <>Page not found</>, path: ERoutesPaths.PAGE_NOT_FOUND,
+    title: 'Page not found', hideFromSideBar: true,  component: <div>Page not found</div>, path: ERoutesPaths.PAGE_NOT_FOUND,
 },]
 
 

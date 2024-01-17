@@ -1,6 +1,5 @@
 import {Navigate, Outlet, Route, Routes, useNavigate} from "react-router";
 import {FC, Suspense, useEffect} from "react";
-import {Layout} from "antd";
 import {privateRoutes} from "./RoutesData.tsx";
 import {ERoutesPaths} from "./Routes.types.ts";
 import {firestore} from "../firebase.ts";
@@ -10,16 +9,16 @@ import {
     collection,
     where
 } from "firebase/firestore";
+import LayoutWrapper from "../components/Layout";
 
 type Props = {
     loggedInUserId?: string;
 };
 const PrivateRoutes = ({loggedInUserId}: Props) => {
-    console.log(loggedInUserId, 'logged in user')
     const navigate = useNavigate();
     const ref = query(collection(firestore, "auth_users"), where('fUserId', "==",  loggedInUserId));
     const queryData = useFirestoreQueryData(['auth_users', {'fUserId': loggedInUserId}], ref);
-
+    console.log(queryData);
 
     useEffect(() => {
         if (!loggedInUserId) {
@@ -27,11 +26,10 @@ const PrivateRoutes = ({loggedInUserId}: Props) => {
         }
     }, [loggedInUserId]);
 
-    console.log(queryData.data, 'logged in user')
     return (
-        <Suspense fallback={<Layout />}>
+        <Suspense fallback={<LayoutWrapper />}>
             <Routes>
-                <Route element={<Layout />}>
+                <Route element={<LayoutWrapper />}>
                     <Route
                         path="*"
                         element={<Navigate replace to={ERoutesPaths.PAGE_NOT_FOUND} />}

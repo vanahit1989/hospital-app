@@ -8,6 +8,7 @@ import {auth} from "../firebase.ts";
 
 const RoutesPage = () => {
     const user = useAuthUser('user', auth);
+    if (user.isLoading) return null;
     return (
         <Suspense fallback={null}>
             <Routes>
