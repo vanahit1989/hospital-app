@@ -1,8 +1,9 @@
 import {collection, doc} from "firebase/firestore";
 import {firestore} from "../firebase.ts";
 import {useFirestoreDocumentData} from "@react-query-firebase/firestore";
+import {useGetAuthUserHook} from "../firebase/useGetAuthUserHook.tsx";
 
-type TPractice = {
+export type TPractice = {
     address: {
         city: string;
         country: string;
@@ -16,11 +17,17 @@ type TPractice = {
     name:string;
     timeZone:string;
 }
-const useGetPractice = (id: string = 'none') => {
+const useGetPractice = () => {
+    const {data} = useGetAuthUserHook()
 
     const collectionRef = collection(firestore, "practices");
-    const ref1 = doc(collectionRef, id)
-    const documentData = useFirestoreDocumentData(['practices', id], ref1,)
+    let ref ;
+    if (data?.practiceId){
+        ref = doc(collectionRef, data?.practiceId )
+    }
+    const documentData = useFirestoreDocumentData(['practices', data?.practiceId], ref,{},{
+        enabled:!!data?.practiceId && !!ref
+    })
 
     return {
         ...documentData,
