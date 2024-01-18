@@ -9,8 +9,8 @@ export const SUpload = styled(Upload)`
             height: 200px;
             img {
                 height: 100%;
-                width: auto;
-                
+                width: auto !important;
+                max-width: 100%;
             }
         }
     }
