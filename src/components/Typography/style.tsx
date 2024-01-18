@@ -1,5 +1,5 @@
 import Typography from "antd/es/typography";
-import styled, { css } from "styled-components";
+import styled, {css} from "styled-components";
 import {TTypographyGeneralProps} from "./types.ts";
 
 const { Title, Text, Paragraph } = Typography;

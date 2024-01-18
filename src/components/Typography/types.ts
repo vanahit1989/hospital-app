@@ -1,7 +1,7 @@
-import { TitleProps } from "antd/es/typography/Title";
-import { LinkProps } from "antd/es/typography/Link";
-import { ParagraphProps } from "antd/es/typography/Paragraph";
-import { TextProps } from "antd/es/typography/Text";
+import {TitleProps} from "antd/es/typography/Title";
+import {LinkProps} from "antd/es/typography/Link";
+import {ParagraphProps} from "antd/es/typography/Paragraph";
+import {TextProps} from "antd/es/typography/Text";
 
 export type TLevel = 1 | 2 | 3 | 4 | 5;
 

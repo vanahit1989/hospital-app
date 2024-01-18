@@ -1,4 +1,4 @@
-import type { FormItemProps } from 'antd/es/form';
+import type {FormItemProps} from 'antd/es/form';
 
 type TFormItemMargin = {
   marginBottom?: number | string;

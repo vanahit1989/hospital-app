@@ -14,7 +14,7 @@ const PageWrapper:FC<TPageWrapperProps> = ({title,subtitle,children})=>{
         <SPageWrapper>
             <SPageHeader>
                 <Title>{title}</Title>
-                <Paragraph color={Colors.Grey}>{subtitle}</Paragraph>
+                {subtitle && <Paragraph color={Colors.Grey}>{subtitle}</Paragraph>}
             </SPageHeader>
             <SPageContent>
                 {children}

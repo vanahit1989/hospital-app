@@ -8,7 +8,6 @@ import {Paragraph} from "../Typography";
 import {Colors} from "../../core/CssVariables.ts";
 
 
-
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 
 const getBase64 = (img: FileType, callback: (url: string) => void) => {

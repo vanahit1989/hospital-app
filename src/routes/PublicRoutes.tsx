@@ -1,5 +1,5 @@
-import { Navigate, Route, Routes, useNavigate } from 'react-router';
-import { FC, Suspense, useEffect } from 'react';
+import {Navigate, Route, Routes, useNavigate} from 'react-router';
+import {FC, Suspense, useEffect} from 'react';
 import {ERoutesPaths} from "./Routes.types.ts";
 import {publicRoutes} from "./RoutesData.tsx";
 

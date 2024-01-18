@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Form from 'antd/es/form';
 import { TFormItemProps } from './types';
-import {Colors, FontSizes, FontWeights, Screens} from "../../../core/CssVariables.ts";
 
 const { Item } = Form;
 const SFormItem = styled(Item)`
