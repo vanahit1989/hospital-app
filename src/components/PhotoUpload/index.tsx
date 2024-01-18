@@ -1,5 +1,5 @@
 import {SUpload} from "./PhotoUpload.style.tsx";
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import type { UploadProps } from "antd/es/upload";
 import {GetProp, message} from "antd";
 import {Icon} from "../Icon";
@@ -25,11 +25,17 @@ const beforeUpload = (file: FileType) => {
     return isJpgOrPng;
 };
 
-const PhotoUpload:FC = ()=>{
+type TPhotoUploadProps = {
+    onChange?:(url:string)=>void
+}
+const PhotoUpload:FC<TPhotoUploadProps> = ({onChange})=>{
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState<string>('');
+
+    useEffect(()=>{
+        onChange && onChange(imageUrl)
+    }, [imageUrl])
     const handleChange: UploadProps['onChange'] = (info) => {
-        console.log(info)
         if (info.file.status === 'uploading') {
             setLoading(true);
             return;
