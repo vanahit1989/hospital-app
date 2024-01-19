@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import {FC} from 'react';
 import IcomoonReact from 'icomoon-react';
-import { TIconProps } from './Icon.type';
+import {TIconProps} from './Icon.type';
 import iconSet from './selection.json';
 
 const Icon: FC<TIconProps> = ({

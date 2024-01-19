@@ -2,29 +2,18 @@ import {Navigate, Outlet, Route, Routes, useNavigate} from "react-router";
 import {FC, Suspense, useEffect} from "react";
 import {privateRoutes} from "./RoutesData.tsx";
 import {ERoutesPaths} from "./Routes.types.ts";
-import {firestore} from "../firebase.ts";
-import { useFirestoreQueryData } from "@react-query-firebase/firestore";
-import {
-    query,
-    collection,
-    where
-} from "firebase/firestore";
 import LayoutWrapper from "../components/Layout";
 
 type Props = {
-    loggedInUserId?: string;
+    isLoggedIn: boolean;
 };
-const PrivateRoutes = ({loggedInUserId}: Props) => {
+const PrivateRoutes = ({isLoggedIn}: Props) => {
     const navigate = useNavigate();
-    const ref = query(collection(firestore, "auth_users"), where('fUserId', "==",  loggedInUserId));
-    const queryData = useFirestoreQueryData(['auth_users', {'fUserId': loggedInUserId}], ref);
-    console.log(queryData);
-
     useEffect(() => {
-        if (!loggedInUserId) {
+        if (!isLoggedIn) {
             navigate(ERoutesPaths.LOGIN);
         }
-    }, [loggedInUserId]);
+    }, [isLoggedIn]);
 
     return (
         <Suspense fallback={<LayoutWrapper />}>

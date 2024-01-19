@@ -1,9 +1,8 @@
-
-import {Form, Input, Button, message, Row, Col} from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import {Button, Col, Form, Input, message, Row} from 'antd';
+import {LockOutlined, UserOutlined} from '@ant-design/icons'
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import {useState} from "react";
-import { auth } from "../../firebase.ts";
+import {auth} from "../../firebase.ts";
 
 const LoginForm = () => {
     const [loading, setLoading] = useState(false);

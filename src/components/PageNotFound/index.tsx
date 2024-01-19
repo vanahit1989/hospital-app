@@ -1,4 +1,4 @@
-import { Row, Col } from 'antd';
+import {Col, Row} from 'antd';
 import Title from 'antd/es/typography/Title';
 
 const PageNotFound = () => {
