@@ -1,4 +1,4 @@
-export type TAddressDB = {
+export type TAddressUI = {
     city: string;
     country: string;
     state: string;
@@ -6,7 +6,18 @@ export type TAddressDB = {
     zipCode: string;
 }
 
+export type TAddressDB = {
+    city: string;
+    country: string;
+    state: string;
+    street: string;
+    zipCode: string;
+}
 export enum ESourceDB {
+    MANUAL = 'MANUAL',
+    EHR = 'EHR'
+}
+export enum ESourceUI {
     MANUAL = 'MANUAL',
     EHR = 'EHR'
 }
