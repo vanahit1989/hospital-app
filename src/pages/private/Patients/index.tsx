@@ -1,76 +1,44 @@
 import PageWrapper from "../../../components/PageWrapper";
 import {Button, Table, TableProps} from "antd";
-import {Space} from "antd/lib";
-import {DownOutlined} from '@ant-design/icons';
 import {ColumnsType} from "antd/es/table";
 import CreatePatient from "./CreatePatient";
 import {useRef} from "react";
 import {Colors} from "../../../core/CssVariables.ts";
+import {TPatientUI} from "../../../data/types/patient.types.ts";
+import {useGetPatients} from "../../../firebase/useGetPatientsHook.tsx";
 
-
-interface DataType {
-    key: number;
-    name: string;
-    age: number;
-    address: string;
-    description: string;
-}
 const Patients = () => {
     const createRef = useRef<{open: () =>void }>();
-    const data: DataType[] = [];
-
-    const columns: ColumnsType<DataType> = [
+    const {data, isLoading} = useGetPatients();
+    const columns: ColumnsType<TPatientUI> = [
         {
             title: 'Name',
             dataIndex: 'name',
+            width: '200px',
+            ellipsis: true
         },
         {
-            title: 'Age',
-            dataIndex: 'age',
-            sorter: (a, b) => a.age - b.age,
+            title: 'Creation date',
+            dataIndex: 'creationDate',
+            width: '200px',
+            ellipsis: true
+            // sorter: (a, b) => dayjs(a.creationDate)- dayjs(b.creationDate),
         },
         {
             title: 'Address',
-            dataIndex: 'address',
-            filters: [
-                {
-                    text: 'London',
-                    value: 'London',
-                },
-                {
-                    text: 'New York',
-                    value: 'New York',
-                },
-            ],
-            onFilter: (value, record) => record.address.indexOf(value as string) === 0,
+            dataIndex: 'addressStr',
+            width: '300px',
+            ellipsis: true
         },
         {
             title: 'Action',
             key: 'action',
             sorter: true,
-            render: () => (
-                <Space size="middle">
-                    <a>Delete</a>
-                    <a>
-                        <Space>
-                            More actions
-                            <DownOutlined />
-                        </Space>
-                    </a>
-                </Space>
-            ),
+            render: () => <Button>Create visit</Button>
         },
     ];
-    for (let i = 1; i <= 10; i++) {
-        data.push({
-            key: i,
-            name: 'John Brown',
-            age: Number(`${i}2`),
-            address: `New York No. ${i} Lake Park`,
-            description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`,
-        });
-    }
-    const tableProps: TableProps<DataType> = {
+
+    const tableProps: TableProps<TPatientUI> = {
         bordered: false,
         loading: false,
         size: 'middle',
@@ -79,13 +47,18 @@ const Patients = () => {
         scroll: {y: '80vh', x: '100vw'},
         tableLayout: 'auto',
     };
+
+    console.log(data, 'data')
     return (
         <PageWrapper title='Patients' actions={<Button type='primary' color={Colors.PrimaryColor} onClick={() => createRef.current?.open()}>Create Patient</Button>}>
             <>
             <CreatePatient ref={createRef} />
             <Table
+                key='docId'
                 {...tableProps}
+                loading={isLoading}
                 pagination={{ position: ['bottomRight'] }}
+                tableLayout='fixed'
                 columns={columns}
                 dataSource={data}
             />

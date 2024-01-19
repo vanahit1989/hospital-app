@@ -10,12 +10,12 @@ import {ESourceUI} from "../data/types/general.types.ts";
 export const useCreatePatientHook = (mutationOptions?: TUseMutationOptions<TPatientUI> ) => {
     const {data:authUser} = useGetAuthUserHook();
     const ref = collection(firestore, "patients").withConverter(patientConverter);
-    const mutation = useFirestoreCollectionMutation<TPatientUI>(ref, mutationOptions);
+    const mutation = useFirestoreCollectionMutation<TPatientUI>(ref, {...mutationOptions});
     const mutate = (data: TPatientUI)  => {
         if (authUser?.practiceId) {
             mutation.mutate({
                 ...data,
-                creationDate: new Date(),
+                creationDate: new Date().toDateString(),
                 practiceId: authUser.practiceId,
                 source: ESourceUI.MANUAL,
             })
