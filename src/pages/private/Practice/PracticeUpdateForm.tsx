@@ -1,4 +1,4 @@
-import {Button, Col, Form, Input, Row} from "antd";
+import {Button, Col, Form, Input, message, Row} from "antd";
 import ImageUpload from "../../../components/ImageUpload";
 import {FormItem} from "../../../components/Form/FormItem";
 import {validationRules} from "../../../components/Form/validationRules.ts";
@@ -13,7 +13,7 @@ type TPracticeUpdateFormProps = {
 }
 const PracticeUpdateForm:FC<TPracticeUpdateFormProps> = ({data,id})=>{
     const {form} = useForm()
-    const {mutate} = useUpdatePractice(id)
+    const {mutate,isLoading} = useUpdatePractice(id)
     const onSubmit = async () => {
         try {
             const formValues =  await form.validateFields()
@@ -32,11 +32,12 @@ const PracticeUpdateForm:FC<TPracticeUpdateFormProps> = ({data,id})=>{
             }
             console.log(updatedData)
               mutate(updatedData,{
-                  onSuccess:(data)=>{
-                      console.log(data)
+                  onSuccess:()=>{
+                      message.success('Data updated successfully!')
                   },
-                  onError:(error)=>{
-                      console.log(error)
+                  onError:()=>{
+                      message.error('Failed')
+                      form.resetFields()
                   }
               })
         }
@@ -128,7 +129,7 @@ const PracticeUpdateForm:FC<TPracticeUpdateFormProps> = ({data,id})=>{
                 </Col>
             </Row>
             <FormItem>
-                <Button type='primary' htmlType='submit'>
+                <Button type='primary' htmlType='submit' loading={isLoading}>
                     Save
                 </Button>
             </FormItem>
