@@ -1,5 +1,5 @@
 import { TPatientUI} from "../data/types/patient.types.ts";
-import {collection, firestore, Timestamp} from "../firebase.ts";
+import {collection, firestore} from "../firebase.ts";
 import {useGetAuthUserHook} from "./useGetAuthUserHook.tsx";
 import {useFirestoreCollectionMutation} from "@react-query-firebase/firestore";
 import message from "antd/es/message/index";

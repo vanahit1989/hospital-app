@@ -88,7 +88,6 @@ const Patients = () => {
                 pagination={{ position: ['bottomRight'] }}
                 columns={columns}
                 dataSource={data}
-                scroll={scroll}
             />
                 </>
         </PageWrapper>
