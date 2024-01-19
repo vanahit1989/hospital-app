@@ -3,9 +3,9 @@ import ImageUpload from "../../../components/ImageUpload";
 import {FormItem} from "../../../components/Form/FormItem";
 import {validationRules} from "../../../components/Form/validationRules.ts";
 import useForm from "../../../hooks/useForm.tsx";
-import {TPractice} from "../../../hooks/useGetPractice.tsx";
+import {TPractice} from "../../../firebase/useGetPractice.tsx";
 import {FC} from "react";
-import useUpdatePractice from "../../../hooks/useUpdatePractice.tsx";
+import useUpdatePractice from "../../../firebase/useUpdatePractice.tsx";
 
 type TPracticeUpdateFormProps = {
     data:TPractice;
@@ -37,7 +37,6 @@ const PracticeUpdateForm:FC<TPracticeUpdateFormProps> = ({data,id})=>{
                   },
                   onError:()=>{
                       message.error('Failed')
-                      form.resetFields()
                   }
               })
         }

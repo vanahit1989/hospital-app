@@ -8,10 +8,7 @@ const useUpdatePractice = (practiceId:string)=>{
     const  ref = doc(collectionRef, practiceId )
 
    const mutation = useFirestoreDocumentMutation(ref)
-    // mutation.mutate({
-    //     doctors:["IQrZCZB904BFgKIK3g2C"],
-    //     name:'new clinic name'
-    // })
+
     return {...mutation}
 }
 

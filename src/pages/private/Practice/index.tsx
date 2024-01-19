@@ -1,6 +1,6 @@
 import PageWrapper from "../../../components/PageWrapper";
 import {Col, Row} from "antd";
-import useGetPractice from "../../../hooks/useGetPractice.tsx";
+import useGetPractice from "../../../firebase/useGetPractice.tsx";
 import PracticeUpdateForm from "./PracticeUpdateForm.tsx";
 import {useGetAuthUserHook} from "../../../firebase/useGetAuthUserHook.tsx";
 

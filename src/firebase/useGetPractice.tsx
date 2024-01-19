@@ -1,7 +1,7 @@
 import {collection, doc} from "firebase/firestore";
 import {firestore} from "../firebase.ts";
 import {useFirestoreDocumentData} from "@react-query-firebase/firestore";
-import {useGetAuthUserHook} from "../firebase/useGetAuthUserHook.tsx";
+import {useGetAuthUserHook} from "./useGetAuthUserHook.tsx";
 
 export type TPractice = {
     address: {
