@@ -1,8 +1,11 @@
 import PageWrapper from "../../../components/PageWrapper";
-import {Table, TableProps} from "antd";
+import {Button, Table, TableProps} from "antd";
 import {Space} from "antd/lib";
 import {DownOutlined} from '@ant-design/icons';
 import {ColumnsType} from "antd/es/table";
+import CreatePatient from "./CreatePatient";
+import {useRef} from "react";
+import {Colors} from "../../../core/CssVariables.ts";
 
 
 interface DataType {
@@ -13,6 +16,7 @@ interface DataType {
     description: string;
 }
 const Patients = () => {
+    const createRef = useRef<{open: () =>void }>();
     const data: DataType[] = [];
 
     const columns: ColumnsType<DataType> = [
@@ -76,7 +80,9 @@ const Patients = () => {
         tableLayout: 'auto',
     };
     return (
-        <PageWrapper title='Patients' >
+        <PageWrapper title='Patients' actions={<Button type='primary' color={Colors.PrimaryColor} onClick={() => createRef.current?.open()}>Create Patient</Button>}>
+            <>
+            <CreatePatient ref={createRef} />
             <Table
                 {...tableProps}
                 pagination={{ position: ['bottomRight'] }}
@@ -84,6 +90,7 @@ const Patients = () => {
                 dataSource={data}
                 scroll={scroll}
             />
+                </>
         </PageWrapper>
     );
 };

@@ -9,7 +9,6 @@ import useGetPractice from "../../hooks/useGetPractice.tsx";
 
 const Practice = () => {
     const {isError: getUserDataError, userData, isLoading: userDataLoading} = useGetUserData()
-
     const {data, isLoading: practiceLoading, isError: practiceError} = useGetPractice(userData?.practiceId)
 
     const {form} = useForm()
