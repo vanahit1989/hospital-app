@@ -10,11 +10,13 @@ import CreateVisitAction from "./CreateVisitAction";
 import Tag from "../../../components/Tag/index.tsx";
 import {ESourceUI} from "../../../data/types/general.types.ts";
 import {useGetSearchColumnProps} from "../../../components/Table/hooks.tsx";
+import dayjs from "dayjs";
 
 const Patients = () => {
     const createRef = useRef<{open: () =>void }>();
     const {data, isLoading} = useGetPatients();
     const { getColumns } = useGetSearchColumnProps();
+
     const columns: ColumnsType<TPatientUI> = [
         {
             title: 'Name',
@@ -30,7 +32,7 @@ const Patients = () => {
             dataIndex: 'creationDate',
             width: '200px',
             ellipsis: true,
-            sorter: (a, b) => a.creationDate.toString().localeCompare(b.creationDate.toString())
+            sorter: (a, b) =>  dayjs(a.creationDate.toString(),'DD/MM/YYYY').isBefore(dayjs(b.creationDate.toString(),'DD/MM/YYYY'))? -1 : 1
         },
         {
             title: 'Address',
