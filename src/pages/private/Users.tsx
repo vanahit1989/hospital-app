@@ -2,9 +2,9 @@ import PageWrapper from "../../components/PageWrapper";
 import { Table} from "antd";
 import useGetDoctorsHook from "../../firebase/useGetDoctorsHook.tsx";
 import {ColumnsType} from "antd/es/table";
-import {TAuthUserDB} from "../../data/types/authUser.types.ts";
+import { TUserUI } from "../../data/types/user.types.ts";
 
-const columns:ColumnsType<TAuthUserDB> = [
+const columns:ColumnsType<TUserUI> = [
     {
         key:'displayName',
         title:'Name',
