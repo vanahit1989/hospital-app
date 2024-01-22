@@ -56,7 +56,7 @@ const Patients = () => {
             filterSearch: true,
             width: '150px',
             ellipsis: true,
-            render: (source) =>  <Tag  color={Colors.DisabledGrey}>{source}</Tag>
+            render: (source) =>  <Tag>{source}</Tag>
         },
         {
             title: 'Action',
