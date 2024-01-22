@@ -1,5 +1,5 @@
 import PageWrapper from "../../../components/PageWrapper";
-import {Col, Row} from "antd";
+import { Col, Row} from "antd";
 import useGetPractice from "../../../firebase/useGetPractice.tsx";
 import PracticeUpdateForm from "./PracticeUpdateForm.tsx";
 import {useGetAuthUserHook} from "../../../firebase/useGetAuthUserHook.tsx";
@@ -12,9 +12,9 @@ const Practice = () => {
         <PageWrapper title='Practice' subtitle='Complete your practice details'>
             {
                 (data && userData?.practiceId)  ?
-                    (<Row justify='center'>
+                    (<Row justify='start'>
                         <Col>
-                            <PracticeUpdateForm data={data} id={userData.practiceId} />
+                            <PracticeUpdateForm data={data} id={userData.practiceId}  />
                         </Col>
                     </Row>)
                     :

@@ -11,13 +11,15 @@ type TPageWrapperProps = {
 const PageWrapper: FC<TPageWrapperProps> = ({title, actions, subtitle, children}) => {
 
     return (<SPageWrapper>
+        <SPageHeader>
             <Row gutter={[12, 12]} justify='space-between'>
-                <Col> <SPageHeader>
+                <Col>
                     <Title>{title}</Title>
                     {subtitle && <Paragraph color={Colors.Grey}>{subtitle}</Paragraph>}
-                </SPageHeader> </Col>
+                </Col>
                 {actions && <Col>{actions}</Col>}
             </Row>
+        </SPageHeader>
             <SPageContent>
                 {children}
             </SPageContent>

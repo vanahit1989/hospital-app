@@ -3,7 +3,7 @@ import ImageUpload from "../../../components/ImageUpload";
 import {FormItem} from "../../../components/Form/FormItem";
 import {validationRules} from "../../../components/Form/validationRules.ts";
 import useForm from "../../../hooks/useForm.tsx";
-import {TPractice} from "../../../firebase/useGetPractice.tsx";
+import  {TPractice} from "../../../firebase/useGetPractice.tsx";
 import {FC} from "react";
 import useUpdatePractice from "../../../firebase/useUpdatePractice.tsx";
 
@@ -30,10 +30,9 @@ const PracticeUpdateForm:FC<TPracticeUpdateFormProps> = ({data,id})=>{
                 },
                 logoUrl:formValues.logoUrl,
             }
-            console.log(updatedData)
               mutate(updatedData,{
                   onSuccess:()=>{
-                      message.success('Data updated successfully!')
+                      message.success('Data updated successfully!');
                   },
                   onError:()=>{
                       message.error('Failed')
