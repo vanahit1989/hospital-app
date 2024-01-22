@@ -7,7 +7,7 @@ import {useGetAuthUserHook} from "../firebase/useGetAuthUserHook.tsx";
 
 const RoutesPage = () => {
     const user = useGetAuthUserHook();
-    if (user.isLoading) return null;
+    if ( user.status !== 'success' ) return null;
     return (
         <Suspense fallback={null}>
             <Routes>

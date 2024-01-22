@@ -10,7 +10,7 @@ import PageNotFound from '../components/PageNotFound';
 export const privateRoutes: PrivateRouteType[] = [{
     title: 'Patients', component: Patients, path: ERoutesPaths.PATIENTS, index: true, icon: EIconNames.USERS,
 }, {
-    title: 'Practice', component: Practice, path: ERoutesPaths.PRACTICE, icon: EIconNames.COMPANY,
+    title: 'Practice Settings', component: Practice, path: ERoutesPaths.PRACTICE, icon: EIconNames.COMPANY,
 }, {
     title: 'Automation', component: Automation, path: ERoutesPaths.AUTOMATION, icon: EIconNames.LAYERS,
 }, {

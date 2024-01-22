@@ -43,16 +43,17 @@ const ImageUpload:FC<TImageUploadProps> = ({initialUrl,onChange}) => {
                     name="image"
                     id="image"
                     onChange={handleImageChange}
+                    draggable={"true"}
                 />
                 {!imageUrl && (
                     <div className='upload-logo'>
                         <Icon
-                        icon={EIconNames.COMPANY}
+                        icon={EIconNames.IMAGE_UPLOAD}
                         color={Colors.LightGrey}
                         data-testid="upload-icon"
                         />
                         <Paragraph className='upload-text' >
-                                Upload logo (JPG/JPEG/PNG/SVG)
+                                Upload logo
                         </Paragraph>
                     </div>
                 )}

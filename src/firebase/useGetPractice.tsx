@@ -1,7 +1,8 @@
-import {collection, doc} from "firebase/firestore";
 import {firestore} from "../firebase.ts";
-import {useFirestoreDocumentData} from "@react-query-firebase/firestore";
 import {useGetAuthUserHook} from "./useGetAuthUserHook.tsx";
+import {useEffect, useState} from "react";
+import { doc, onSnapshot } from "firebase/firestore";
+
 
 export type TPractice = {
     address: {
@@ -18,20 +19,24 @@ export type TPractice = {
     timeZone:string;
 }
 const useGetPractice = () => {
-    const {data} = useGetAuthUserHook()
+    const {data:userData} = useGetAuthUserHook()
+    const [data,setData] = useState<TPractice | null>(null);
 
-    const collectionRef = collection(firestore, "practices");
-    let ref ;
-    if (data?.practiceId){
-        ref = doc(collectionRef, data?.practiceId )
-    }
-    const documentData = useFirestoreDocumentData(['practices', data?.practiceId], ref,{},{
-        enabled:!!data?.practiceId && !!ref
-    })
+    useEffect(() => {
+        const unsub = onSnapshot(doc(firestore, "practices",  userData?.practiceId || ''), (document) => {
+            if (document.exists()){
+                setData(document.data() as TPractice)
+            }
+            else setData(null)
+        });
+
+        return ()=>{
+            unsub();
+        }
+    }, []);
 
     return {
-        ...documentData,
-        data: documentData.data ? documentData.data as TPractice : null
+        data
     }
 }
 
