@@ -14,7 +14,7 @@ export type TPatientUI =  {
     name: string;
     address: TAddressUI;
     addressStr?: string;
-    creationDate: Date;
+    creationDate: string | Timestamp;
     practiceId: string;
     source: ESourceUI;
 }

@@ -6,15 +6,18 @@ import { TPatientUI} from "../../../../data/types/patient.types.ts";
 import {FormItem} from "../../../../components/Form/FormItem";
 import {patientFields} from "./CreatePatiet.data.ts";
 import {useCreatePatientHook} from "../../../../firebase/useCreatePatientHook.tsx";
+import {useQueryClient} from "react-query";
 
 const {name, country, street, state, city, zipCode} = patientFields;
 
-// eslint-disable-next-line no-empty-pattern
-const CreatePatient = forwardRef(({}, ref) => {
-   const [open, setOpen] = useState(false);
+
+const CreatePatient = forwardRef((_, ref) => {
+    const queryClient = useQueryClient()
+    const [open, setOpen] = useState(false);
    const [form] = useForm<TPatientUI>();
    const {isLoading, mutate } = useCreatePatientHook({
        onSuccess: () => {
+           queryClient.invalidateQueries({ queryKey: ['patients'] });
            message.success(`Patient has been added successfully!`, 3);
     },
        onError: (err) => {

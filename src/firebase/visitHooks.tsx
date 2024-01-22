@@ -1,26 +1,25 @@
-import { TPatientUI} from "../data/types/patient.types.ts";
 import {collection, firestore} from "../firebase.ts";
 import {useGetAuthUserHook} from "./useGetAuthUserHook.tsx";
 import {useFirestoreCollectionMutation} from "@react-query-firebase/firestore";
 import message from "antd/es/message/index";
-import {patientConverter} from "../data/converters/patient.converters.ts";
 import {TUseMutationOptions} from "../data/types/firebase.types.ts";
-import {ESourceUI} from "../data/types/general.types.ts";
+import {TVisitUI} from "../data/types/visitation.types.ts";
+import {visitConverter} from "../data/converters/visit.converter.ts";
 
-export const useCreatePatientHook = (mutationOptions?: TUseMutationOptions<TPatientUI> ) => {
+export const useCreateVisitHook = (mutationOptions?: TUseMutationOptions<TVisitUI> ) => {
     const {data:authUser} = useGetAuthUserHook();
-    const ref = collection(firestore, "patients").withConverter(patientConverter);
-    const mutation = useFirestoreCollectionMutation<TPatientUI>(ref, {...mutationOptions});
-    const mutate = (data: TPatientUI)  => {
+    const ref = collection(firestore, "visits").withConverter(visitConverter);
+    const mutation = useFirestoreCollectionMutation<TVisitUI>(ref, {...mutationOptions});
+    const mutate = (data: TVisitUI)  => {
+        console.log(data, 'data')
         if (authUser?.practiceId) {
             mutation.mutate({
                 ...data,
                 creationDate: new Date().toDateString(),
                 practiceId: authUser.practiceId,
-                source: ESourceUI.MANUAL,
             })
         } else {
-            message.error(`You are not authorized`, 3000);
+            message.error(`You are not authorized`, 3);
 
         }
     }
