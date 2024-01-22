@@ -1,24 +1,35 @@
 import PageWrapper from "../../components/PageWrapper";
 import { Table} from "antd";
-import useGetDoctorsHook from "../../firebase/useGetDoctorsHook.tsx";
 import {ColumnsType} from "antd/es/table";
-import { TUserUI } from "../../data/types/user.types.ts";
+import {TUserUI} from "../../data/types/user.types.ts";
+import {useGetDoctors} from "../../firebase/userHooks.tsx";
+import {useGetSearchColumnProps} from "../../components/Table/hooks.tsx";
 
-const columns:ColumnsType<TUserUI> = [
-    {
-        key:'displayName',
-        title:'Name',
-        dataIndex:'displayName'
-    },
-    {
-        key:'email',
-        title:'Email',
-        dataIndex:'email'
-    }
-]
+
+
 const Users = () => {
-    const {data,isLoading}= useGetDoctorsHook();
-    console.log(data)
+    const {data,isLoading}= useGetDoctors();
+    const { getColumns } = useGetSearchColumnProps();
+    const columns:ColumnsType<TUserUI> = [
+        {
+            key:'displayName',
+            title:'Name',
+            dataIndex:'displayName',
+            sorter: (a, b) => a.displayName.localeCompare(b.displayName),
+            ...getColumns('displayName')
+        },
+        {
+            key:'email',
+            title:'Email',
+            dataIndex:'email'
+        },
+        {
+            key:'type',
+            title:'Type',
+            dataIndex:'type'
+        }
+    ]
+
     return (
         <PageWrapper title='Doctors'>
                 <Table

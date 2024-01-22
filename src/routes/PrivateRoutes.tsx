@@ -11,7 +11,7 @@ const PrivateRoutes = ({isLoggedIn}: Props) => {
     const navigate = useNavigate();
     useEffect(() => {
         if (!isLoggedIn) {
-            navigate(ERoutesPaths.LOGIN);
+            navigate('/login');
         }
     }, [isLoggedIn]);
 

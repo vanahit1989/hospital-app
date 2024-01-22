@@ -4,7 +4,8 @@ export enum EIconNames {
   LAYERS = 'layers',
   USER = 'user',
   COMPANY = 'company',
-  IMAGE_UPLOAD = 'imageUpload'
+  IMAGE_UPLOAD = 'imageUpload',
+  LOGOUT = 'logout'
 }
 
 export type TIconProps = {

@@ -12,5 +12,6 @@ export const useGetAuthUserHook = () => {
     }
     const {data, ...queryData} = useFirestoreQueryData(['auth_users', {'fUserId': user.data?.uid}], ref, {
     }, { enabled: !!user?.data?.uid && !!ref});
-    return {...queryData, data: data?.length ? data[0] : null}
+
+    return {...queryData, data: data?.length ? data[0] : null,isLoading:user.isLoading || queryData.isLoading}
 }
