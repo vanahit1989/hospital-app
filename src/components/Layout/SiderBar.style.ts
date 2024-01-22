@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import Sider from "antd/es/layout/Sider";
+import {Row} from "antd";
+import {Colors} from "../../core/CssVariables.ts";
 
-const SSider = styled(Sider)`
+export const SSider = styled(Sider)`
     &.ant-layout-sider {
         width:200px;
         background-color: white;
@@ -14,6 +16,10 @@ const SSider = styled(Sider)`
         }
     }
 `
+export const PracticeInfoWrapper = styled(Row)`
+    min-height:50px;
+    background-color: ${Colors.LightBackground};
+    margin-bottom: 16px;
+`
 
-export default SSider;
 
