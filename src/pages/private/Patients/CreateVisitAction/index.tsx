@@ -10,7 +10,7 @@ import Button from "../../../../components/Button";
     return (
         <>
             <CreateVisitModal ref={visitRef} patientId={docId}/>
-            <Button onClick={() => visitRef.current?.open()}>Create Visit</Button>
+            <Button type='primary' onClick={() => visitRef.current?.open()}>Create Visit</Button>
         </>
     );
 };

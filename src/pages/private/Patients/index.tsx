@@ -2,33 +2,61 @@ import PageWrapper from "../../../components/PageWrapper";
 import {Button, Table, TableProps} from "antd";
 import {ColumnsType} from "antd/es/table";
 import CreatePatient from "./CreatePatient";
-import {useRef} from "react";
+import { useRef } from "react";
 import {Colors} from "../../../core/CssVariables.ts";
 import {TPatientUI} from "../../../data/types/patient.types.ts";
 import {useGetPatients} from "../../../firebase/useGetPatientsHook.tsx";
 import CreateVisitAction from "./CreateVisitAction";
+import Tag from "../../../components/Tag/index.tsx";
+import {ESourceUI} from "../../../data/types/general.types.ts";
+import {useGetSearchColumnProps} from "../../../components/Table/hooks.tsx";
 
 const Patients = () => {
     const createRef = useRef<{open: () =>void }>();
     const {data, isLoading} = useGetPatients();
+    const { getColumns } = useGetSearchColumnProps();
     const columns: ColumnsType<TPatientUI> = [
         {
             title: 'Name',
             dataIndex: 'name',
             width: '200px',
-            ellipsis: true
+            ellipsis: true,
+            sorter: (a, b) => a.name.localeCompare(b.name),
+            ...getColumns('name'),
+
         },
         {
             title: 'Creation date',
             dataIndex: 'creationDate',
             width: '200px',
             ellipsis: true,
+            sorter: (a, b) => a.creationDate.toString().localeCompare(b.creationDate.toString())
         },
         {
             title: 'Address',
             dataIndex: 'addressStr',
             width: '300px',
-            ellipsis: true
+            ellipsis: true,
+            ...getColumns('addressStr')
+        },
+        {
+            title: 'Source',
+            dataIndex: 'source',
+            filters: [
+                {
+                    text: ESourceUI.MANUAL,
+                    value: ESourceUI.MANUAL
+                },
+                {
+                    text: ESourceUI.EHR,
+                    value: ESourceUI.EHR
+                },
+            ],
+            onFilter: (value, record) => record.source.startsWith(value as string),
+            filterSearch: true,
+            width: '150px',
+            ellipsis: true,
+            render: (source) =>  <Tag  color={Colors.DisabledGrey}>{source}</Tag>
         },
         {
             title: 'Action',
