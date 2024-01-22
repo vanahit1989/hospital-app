@@ -35,6 +35,7 @@ export const sourceConverter: TConvertor<ESourceUI, ESourceDB> = {
             [ESourceDB.MANUAL]: ESourceUI.MANUAL,
             [ESourceDB.EHR]: ESourceUI.EHR,
         };
+        console.log(sources[data], 'source data')
         return sources[data];
     } ,
     toDb: (data) => {
