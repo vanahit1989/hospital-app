@@ -6,6 +6,7 @@ import {useRef} from "react";
 import {Colors} from "../../../core/CssVariables.ts";
 import {TPatientUI} from "../../../data/types/patient.types.ts";
 import {useGetPatients} from "../../../firebase/useGetPatientsHook.tsx";
+import CreateVisitAction from "./CreateVisitAction";
 
 const Patients = () => {
     const createRef = useRef<{open: () =>void }>();
@@ -21,8 +22,7 @@ const Patients = () => {
             title: 'Creation date',
             dataIndex: 'creationDate',
             width: '200px',
-            ellipsis: true
-            // sorter: (a, b) => dayjs(a.creationDate)- dayjs(b.creationDate),
+            ellipsis: true,
         },
         {
             title: 'Address',
@@ -34,7 +34,7 @@ const Patients = () => {
             title: 'Action',
             key: 'action',
             sorter: true,
-            render: () => <Button>Create visit</Button>
+            render: (row:TPatientUI) => <CreateVisitAction {...row} />
         },
     ];
 
@@ -43,12 +43,10 @@ const Patients = () => {
         loading: false,
         size: 'middle',
         showHeader: true,
-        rowSelection: {} ,
         scroll: {y: '80vh', x: '100vw'},
         tableLayout: 'auto',
     };
 
-    console.log(data, 'data')
     return (
         <PageWrapper title='Patients' actions={<Button type='primary' color={Colors.PrimaryColor} onClick={() => createRef.current?.open()}>Create Patient</Button>}>
             <>
