@@ -3,21 +3,20 @@ import ImageUpload from "../../../components/ImageUpload";
 import {FormItem} from "../../../components/Form/FormItem";
 import {validationRules} from "../../../components/Form/validationRules.ts";
 import useForm from "../../../hooks/useForm.tsx";
-import  {TPractice} from "../../../firebase/useGetPractice.tsx";
 import {FC} from "react";
 import useUpdatePractice from "../../../firebase/useUpdatePractice.tsx";
+import {TPracticeUI} from "../../../data/types/practice.type.ts";
 
 type TPracticeUpdateFormProps = {
-    data:TPractice;
-    id:string
+    data:TPracticeUI;
 }
-const PracticeUpdateForm:FC<TPracticeUpdateFormProps> = ({data,id})=>{
+const PracticeUpdateForm:FC<TPracticeUpdateFormProps> = ({data})=>{
     const {form} = useForm()
-    const {mutate,isLoading} = useUpdatePractice(id)
+    const {mutate,isLoading} = useUpdatePractice(data.docId)
     const onSubmit = async () => {
         try {
             const formValues =  await form.validateFields()
-            const updatedData:TPractice = {
+            const updatedData:TPracticeUI = {
                 ...data,
                 name:formValues.name,
                 timeZone:formValues.timeZone,
@@ -30,6 +29,7 @@ const PracticeUpdateForm:FC<TPracticeUpdateFormProps> = ({data,id})=>{
                 },
                 logoUrl:formValues.logoUrl,
             }
+            console.log(updatedData)
               mutate(updatedData,{
                   onSuccess:()=>{
                       message.success('Data updated successfully!');
@@ -40,7 +40,7 @@ const PracticeUpdateForm:FC<TPracticeUpdateFormProps> = ({data,id})=>{
               })
         }
         catch (err){
-            console.log(err || 'error11111')
+            console.log(err || 'error')
         }
     }
 
