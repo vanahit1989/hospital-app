@@ -1,47 +1,22 @@
-import {firestore} from "../firebase.ts";
+import {collection, firestore} from "../firebase.ts";
 import {useGetAuthUserHook} from "./useGetAuthUserHook.tsx";
-import {useEffect, useState} from "react";
-import { doc, onSnapshot } from "firebase/firestore";
-import {Unsubscribe} from "@firebase/firestore";
+import { query } from "firebase/firestore";
+import {practiceConverter} from "../data/converters/practice.converter.ts";
+import {useFirestoreQueryData} from "@react-query-firebase/firestore";
 
-
-export type TPractice = {
-    address: {
-        city: string;
-        country: string;
-        state: string;
-        street: string;
-        zipCode: string
-    };
-    creationDate:string;
-    doctors:string[];
-    logoUrl:string;
-    name:string;
-    timeZone:string;
-}
 const useGetPractice = () => {
-    const {data:userData} = useGetAuthUserHook()
-    const [data,setData] = useState<TPractice | null>(null);
-
-    useEffect(() => {
-        let unsub:Unsubscribe;
-        if (userData?.practiceId){
-             unsub = onSnapshot(doc(firestore, "practices",  userData?.practiceId ), (document) => {
-                if (document.exists()){
-                    setData(document.data() as TPractice)
-                }
-                else setData(null)
-            });
-        }
-
-        return ()=>{
-            unsub && unsub();
-        }
-    }, []);
-
-    return {
-        data
+    const {data:authUser,isLoading:userLoading} = useGetAuthUserHook();
+    let ref;
+    if (authUser?.practiceId) {
+        // ref = query(collection(firestore, "practices").withConverter(practiceConverter), where('practiceId', "==",  authUser?.practiceId ));
+        ref = query(collection(firestore, "practices").withConverter(practiceConverter));
     }
+    const {data, ...queryData} = useFirestoreQueryData(['practiceId', {'practiceId': authUser?.practiceId}], ref,
+        {subscribe:true}, { enabled: !!authUser?.practiceId && !!ref});
+
+    console.log(data?.find(item=>item.docId === authUser?.practiceId))
+    return {...queryData, data: data?.length ? data.find(item=>item.docId === authUser?.practiceId) : null, isLoading:userLoading || queryData.isLoading}
+
 }
 
 export default useGetPractice;
