@@ -36,7 +36,7 @@ export type TVisitDB = {
     patientId: string;
     practiceId: string;
     patientPortion?: number;
-    paymentStatus?: EPaymentStatusDB
+    status?: EPaymentStatusDB
     services: TServiceDB[];
     patientName?: string;
     totalAmount?: number;

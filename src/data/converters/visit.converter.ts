@@ -31,7 +31,7 @@ export const visitConverter:TFirebaseConverterType<TVisitUI> = {
                 practiceId: visit.practiceId,
                 patientId: visit.patientId,
                 totalAmount: visit.totalAmount || 0,
-                paymentStatus: paymentStatusConverter.fromDb(visit.paymentStatus || EPaymentStatusDB.PENDING),
+                paymentStatus: paymentStatusConverter.fromDb(visit.status || EPaymentStatusDB.PENDING),
                 patientPortion: visit.patientPortion || 0,
                 amountPaid: visit?.amountPaid || 0,
                 services: (visit.services || []).map(item =>  serviceConverter.fromDb(item))
