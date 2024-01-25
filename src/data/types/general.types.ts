@@ -21,3 +21,13 @@ export enum ESourceUI {
     MANUAL = 'MANUAL',
     EHR = 'EHR'
 }
+
+export enum EPaymentStatusUI  {
+    PENDING = 'Pending',
+    PAID = 'Paid'
+}
+
+export enum EPaymentStatusDB  {
+    PENDING = 'PENDING',
+    PAID = 'PAID'
+}

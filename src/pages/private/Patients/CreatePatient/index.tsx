@@ -8,7 +8,7 @@ import {patientFields} from "./CreatePatiet.data.ts";
 import {useCreatePatientHook} from "../../../../firebase/useCreatePatientHook.tsx";
 import {useQueryClient} from "react-query";
 
-const {name, country, street, state, city, zipCode} = patientFields;
+const {name, email, country, street, state, city, zipCode} = patientFields;
 
 
 const CreatePatient = forwardRef((_, ref) => {
@@ -48,6 +48,11 @@ const CreatePatient = forwardRef((_, ref) => {
                   <Col span={24}>
                       <FormItem {...name}>
                           <Input placeholder={name.placeholder} />
+                      </FormItem>
+                  </Col>
+                  <Col span={24}>
+                      <FormItem {...email}>
+                          <Input placeholder={email.placeholder} />
                       </FormItem>
                   </Col>
                   <Col span={24}>

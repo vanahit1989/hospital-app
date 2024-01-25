@@ -1,5 +1,5 @@
-import {TParagraphProps, TTextProps, TTitleProps} from "./types.ts";
-import {SParagraph, SText, STitle} from "./style.tsx";
+import {TLinkProps, TParagraphProps, TTextProps, TTitleProps} from "./types.ts";
+import {SLinkText, SParagraph, SText, STitle} from "./style.tsx";
 
 export const Title = ({ ...props }: TTitleProps) => {
   return (
@@ -10,6 +10,11 @@ export const Title = ({ ...props }: TTitleProps) => {
 export const Text = ({ ...props }: TTextProps) => {
   return (
         <SText {...props} />
+  );
+};
+export const LinkText = ({ ...props }: TLinkProps) => {
+  return (
+        <SLinkText {...props} />
   );
 };
 

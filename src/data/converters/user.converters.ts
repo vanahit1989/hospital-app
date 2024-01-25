@@ -1,6 +1,7 @@
 import {TConvertor, TFirebaseConverterType} from "../types/converter.types.ts";
 import {ERoleDB, ERoleUI, EUserTypeDB, EUserTypeUI, TUserDB, TUserUI} from "../types/user.types.ts";
 import {QueryDocumentSnapshot, SnapshotOptions} from "firebase/firestore";
+import {TPaymentLinkDB, TPaymentLinkUI} from "../types/visit.types.ts";
 
 export const roleConverter: TConvertor<ERoleUI, ERoleDB> = {
     fromDb: (data) => {
@@ -65,6 +66,32 @@ export const userConverter:TFirebaseConverterType<TUserUI> = {
             type: userTypeConverter.fromDb(user.type),
             fUserId: user.fUserId,
             email: user.email
+        }
+    }
+};
+
+
+export const paymentLinkConverter:TFirebaseConverterType<TPaymentLinkUI> = {
+    toFirestore: (data: TPaymentLinkUI):TPaymentLinkDB => {
+        return {
+            amount: data.amount,
+            practiceId: data.practiceId,
+            visitId: data.visitId,
+            reason: data.reason,
+            quantity: data.quantity,
+        };
+    },
+    fromFirestore: (
+        snapshot: QueryDocumentSnapshot,
+        options: SnapshotOptions
+    ) => {
+        const data = snapshot.data(options)! as TPaymentLinkDB;
+        return {
+            amount: data.amount,
+            practiceId: data.practiceId,
+            visitId: data.visitId,
+            reason: data.reason,
+            quantity: data.quantity,
         }
     }
 };

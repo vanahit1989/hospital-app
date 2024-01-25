@@ -26,6 +26,13 @@ const Patients = () => {
             sorter: (a, b) => a.name.localeCompare(b.name),
             ...getColumns('name'),
 
+        },  {
+            title: 'Email',
+            dataIndex: 'email',
+            width: '200px',
+            ellipsis: true,
+            sorter: (a, b) => a.email.localeCompare(b.email),
+            ...getColumns('email'),
         },
         {
             title: 'Creation date',
@@ -43,6 +50,7 @@ const Patients = () => {
         },
         {
             title: 'Source',
+            align: 'center',
             dataIndex: 'source',
             filters: [
                 {
@@ -63,7 +71,8 @@ const Patients = () => {
         {
             title: 'Action',
             key: 'action',
-            sorter: true,
+            align: 'center',
+            width: '100px',
             render: (row:TPatientUI) => <CreateVisitAction {...row} />
         },
     ];
@@ -73,7 +82,7 @@ const Patients = () => {
         loading: false,
         size: 'middle',
         showHeader: true,
-        scroll: {y: '80vh', x: '100vw'},
+        scroll: {y: '80vh', x: 'auto'},
         tableLayout: 'auto',
     };
 

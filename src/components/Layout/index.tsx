@@ -27,7 +27,7 @@ const LayoutWrapper = () => {
             label: item.title,
         }
     }), [])
-    const onSignOut =async ()=>{
+    const onSignOut = async ()=>{
         await signOut(auth);
     }
     const {pathname} = useLocation();

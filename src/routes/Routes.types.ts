@@ -17,6 +17,7 @@ export type PrivateRouteType = PublicRouteType & {
 export enum ERoutesPaths {
     LOGIN = 'login',
     PATIENTS = 'patients',
+    VISITS = 'visits',
     AUTOMATION = 'automation',
     PRACTICE = 'practice',
     USERS = 'users',

@@ -7,6 +7,7 @@ export type TPatientDB = {
     creationDate: Timestamp;
     practiceId: string;
     source: ESourceDB;
+    email: string;
 }
 
 export type TPatientUI =  {
@@ -17,4 +18,16 @@ export type TPatientUI =  {
     creationDate: string | Timestamp;
     practiceId: string;
     source: ESourceUI;
+    email: string;
+}
+
+export type TPatientShortDataUI = {
+    docId: string;
+    name: string;
+}
+
+export type TPatientShortDataDB = {
+    name: string;
+    docId: string;
+
 }
