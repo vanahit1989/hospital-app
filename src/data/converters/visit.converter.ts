@@ -14,7 +14,6 @@ export const visitConverter:TFirebaseConverterType<TVisitUI> = {
             doctorId: visit.doctorId,
             practiceId: visit.practiceId,
             patientId: visit.patientId,
-            amountPaid: visit.amountPaid,
             services: (visit.services || []).map(item =>  serviceConverter.toDb(item))
         };
     },
