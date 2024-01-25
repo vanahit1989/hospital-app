@@ -1,5 +1,12 @@
 import {TConvertor, TFetchConverter} from "../types/converter.types.ts";
-import {ESourceDB, ESourceUI, TAddressDB, TAddressUI} from "../types/general.types.ts";
+import {
+    EPaymentStatusDB,
+    EPaymentStatusUI,
+    ESourceDB,
+    ESourceUI,
+    TAddressDB,
+    TAddressUI
+} from "../types/general.types.ts";
 
 export const addressToStringConverter:TFetchConverter<string, TAddressDB> = {
     fromDb: ({country, city, street, zipCode, state}) => {
@@ -35,7 +42,6 @@ export const sourceConverter: TConvertor<ESourceUI, ESourceDB> = {
             [ESourceDB.MANUAL]: ESourceUI.MANUAL,
             [ESourceDB.EHR]: ESourceUI.EHR,
         };
-        console.log(sources[data], 'source data')
         return sources[data];
     } ,
     toDb: (data) => {
@@ -44,6 +50,27 @@ export const sourceConverter: TConvertor<ESourceUI, ESourceDB> = {
         } = {
             [ESourceUI.MANUAL]: ESourceDB.MANUAL,
             [ESourceUI.EHR]: ESourceDB.EHR,
+        };
+        return sources[data];
+    }
+}
+
+export const paymentStatusConverter: TConvertor<EPaymentStatusUI, EPaymentStatusDB> = {
+    fromDb: (data) => {
+        const sources: {
+            [key in EPaymentStatusDB]: EPaymentStatusUI;
+        } = {
+            [EPaymentStatusDB.PENDING]: EPaymentStatusUI.PENDING,
+            [EPaymentStatusDB.PAID]: EPaymentStatusUI.PAID,
+        };
+        return sources[data];
+    } ,
+    toDb: (data) => {
+        const sources: {
+            [key in EPaymentStatusUI]: EPaymentStatusDB;
+        } = {
+            [EPaymentStatusUI.PENDING]: EPaymentStatusDB.PENDING,
+            [EPaymentStatusUI.PAID]: EPaymentStatusDB.PAID,
         };
         return sources[data];
     }

@@ -25,6 +25,12 @@ export const patientFields = {
         placeholder: 'street',
         rules: [validationRules.required()],
     },
+    email: {
+        name: 'email',
+        label: 'Email',
+        placeholder: 'Email',
+        rules: [validationRules.required(), validationRules.email()],
+    },
     zipCode: {
         name: 'zipCode',
         label: 'Zip code',

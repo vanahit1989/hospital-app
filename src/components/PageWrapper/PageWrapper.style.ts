@@ -6,7 +6,7 @@ export const SPageHeader =  styled.div`
     height: fit-content;
 `
 export const SPageContent = styled.div`
-    padding: 16px;
+    padding-top: 16px;
     height: 90%;
     overflow-y: auto;
 `

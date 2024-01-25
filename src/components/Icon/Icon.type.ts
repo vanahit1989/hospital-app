@@ -5,7 +5,9 @@ export enum EIconNames {
   USER = 'user',
   COMPANY = 'company',
   IMAGE_UPLOAD = 'imageUpload',
-  LOGOUT = 'logout'
+  LOGOUT = 'logout',
+  ARROW_LEFT='arrow-left'
+
 }
 
 export type TIconProps = {

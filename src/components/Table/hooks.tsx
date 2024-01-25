@@ -71,7 +71,7 @@ export const useGetSearchColumnProps = () => {
                     <SearchOutlined style={{ color: filtered ? '#1677ff' : undefined }} />
                 ),
                 onFilter: (value: boolean | Key, record: any) =>
-                    record[dataIndex]
+                    (record[dataIndex] || '')
                         .toString()
                         .toLowerCase()
                         .includes((value as string).toLowerCase()),
@@ -80,16 +80,16 @@ export const useGetSearchColumnProps = () => {
                         setTimeout(() => searchInput.current?.select(), 100);
                     }
                 },
-                render: (text: string) =>
+                render: (text?: string) =>
                     searchedColumns.includes(dataIndex) ? (
                         <Highlighter
                             highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
                             searchWords={[searchTexts[dataIndex]]}
                             autoEscape
-                            textToHighlight={text ? text.toString() : ''}
+                            textToHighlight={text ? text?.toString() : '-'}
                         />
                     ) : (
-                        text
+                        text || "-"
                     ),
 
         }
